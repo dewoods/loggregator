@@ -103,7 +103,7 @@ func main() {
 
 	logger := cfcomponent.NewLogger(*logLevel, *logFilePath, "loggregator")
 
-	config := &Config{SourcePort: 3456, WebPort: 8080, UaaVerificationKeyFile: *uaaVerificationKeyFile}
+	config := &Config{SourcePort: 3456, WebPort: 8081, UaaVerificationKeyFile: *uaaVerificationKeyFile}
 	err := cfcomponent.ReadConfigInto(config, *configFile)
 	if err != nil {
 		panic(err)
@@ -128,7 +128,8 @@ func main() {
 
 	cfc, err := cfcomponent.NewComponent(
 		config.SystemDomain,
-		config.WebPort,
+		//		config.WebPort,
+		8080,
 		"LoggregatorServer",
 		config.Index,
 		&LoggregatorServerHealthMonitor{},
